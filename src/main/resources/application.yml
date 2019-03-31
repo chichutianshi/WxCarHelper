@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     name: test
-    url: ${druid.url}
-    username: ${username}
-    password: ${password}
+    url: ${druid.url}ggg
+    username: rootgggg
+    password: root
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: ${driverclassName}
     filters: stat
