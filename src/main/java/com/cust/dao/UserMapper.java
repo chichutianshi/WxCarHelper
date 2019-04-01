@@ -1,9 +1,9 @@
 package com.cust.dao;
 
-import com.cust.Entity.User;
+import org.springframework.stereotype.Repository;
 
+import java.util.Map;
+@Repository
 public interface UserMapper {
-    int insert(User record);
-
-    int insertSelective(User record);
+    Map selectUser(Map user);
 }
