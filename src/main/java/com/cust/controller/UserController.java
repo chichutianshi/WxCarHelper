@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 
 @RestController
@@ -31,7 +35,9 @@ public class UserController {
      * @return String
      */
     @RequestMapping("/login")
-    public String wxUserLogin(Map map) {
+    public String wxUserLogin(HttpServletResponse response, HttpServletRequest request) throws IOException, ServletException {
+        request.setCharacterEncoding("UTF-8");
+        Map map=request.getParameterMap();
         System.out.println(map.get("code"));
         String userOpenId = wxUtils.oauth2GetOpenid((String) map.get("code"));
         System.out.println(userOpenId);
@@ -40,11 +46,11 @@ public class UserController {
             JSONObject usrOpenIdAndSessionKey = (JSONObject) (new JSONParser().parse(userOpenId));
             if ((int) usrOpenIdAndSessionKey.get("errcode") == 0) {
                 //获取openid成功
-                String openId = (String) usrOpenIdAndSessionKey.get("openid");
-                System.out.println(openId);
+                String openid = (String) usrOpenIdAndSessionKey.get("openid");
+                System.out.println(openid);
                 String session_Key = (String) usrOpenIdAndSessionKey.get("session_key");
                 System.out.println(session_Key);
-                if (userService.selectUserOpenId(openId)) {
+                if (userService.selectUserOpenId(openid)) {
                     //此用户为老用户
 
                 } else {

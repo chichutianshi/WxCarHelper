@@ -11,8 +11,8 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public boolean selectUserOpenId(String openId) {
-        Map userInfo = userMapper.selectUser(openId);
+    public boolean selectUserOpenId(String openid) {
+        Map userInfo = userMapper.selectUser(openid);
         System.out.println(userInfo);
         if (userInfo != null) {
             return true;

@@ -1,101 +1,77 @@
 package com.cust.Entity;
 
+
 public class User {
-    private String id;
 
-    private String username;
+  private int id;
+  private String nikename;
+  private int gender;
+  private String province;
+  private String city;
+  private String country;
+  private String openid;
 
-    private String password;
 
-    private String nickname;
+  public long getId() {
+    return id;
+  }
 
-    private String phone;
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    private String address;
 
-    private String idcard;
+  public String getNikename() {
+    return nikename;
+  }
 
-    private String power;
+  public void setNikename(String nikename) {
+    this.nikename = nikename;
+  }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+  public long getGender() {
+    return gender;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public void setGender(int gender) {
+    this.gender = gender;
+  }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
 
-    public String getPassword() {
-        return password;
-    }
+  public String getProvince() {
+    return province;
+  }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
+  public void setProvince(String province) {
+    this.province = province;
+  }
 
-    public String getNickname() {
-        return nickname;
-    }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname == null ? null : nickname.trim();
-    }
+  public String getCity() {
+    return city;
+  }
 
-    public String getPhone() {
-        return phone;
-    }
+  public void setCity(String city) {
+    this.city = city;
+  }
 
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
-    }
 
-    public String getAddress() {
-        return address;
-    }
+  public String getCountry() {
+    return country;
+  }
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
+  public void setCountry(String country) {
+    this.country = country;
+  }
 
-    public String getIdcard() {
-        return idcard;
-    }
 
-    public void setIdcard(String idcard) {
-        this.idcard = idcard == null ? null : idcard.trim();
-    }
+  public String getOpenid() {
+    return openid;
+  }
 
-    public String getPower() {
-        return power;
-    }
+  public void setOpenid(String openid) {
+    this.openid = openid;
+  }
 
-    public void setPower(String power) {
-        this.power = power == null ? null : power.trim();
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
-        sb.append(", nickname=").append(nickname);
-        sb.append(", phone=").append(phone);
-        sb.append(", address=").append(address);
-        sb.append(", idcard=").append(idcard);
-        sb.append(", power=").append(power);
-        sb.append("]");
-        return sb.toString();
-    }
 }

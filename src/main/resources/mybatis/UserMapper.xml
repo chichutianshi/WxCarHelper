@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cust.dao.UserMapper">
     <select id="selectUser" parameterType="String" resultType="java.util.Map">
-        select * from user where openId=#{openId}
+        select * from user where openid = #{openid}
     </select>
-    <insert id="insertUserInfo" parameterType="java.util.Map" >
-        insert into user values ()
+    <insert id="insertUserInfo" parameterType="java.util.Map">
+        insert into user (nikename, gender, province, city, country, openid) values (#{nikename},#{gender},#{province},#{city},#{country},#{openid})
     </insert>
 </mapper>
