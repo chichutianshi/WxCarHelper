@@ -23,7 +23,5 @@ spring:
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
 
-mybatis:
-  mapper-locations: classpath:mybatis/*.xml
 
 

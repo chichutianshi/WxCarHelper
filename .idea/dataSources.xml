@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="cargg@localhost" uuid="29bddafe-4dcd-45b5-8e6e-20bdd3baef12">
+    <data-source source="LOCAL" name="wxcar@localhost" uuid="29bddafe-4dcd-45b5-8e6e-20bdd3baef12">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/cargg</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/wxcar</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

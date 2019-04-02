@@ -1,77 +1,112 @@
 package com.cust.Entity;
 
-
 public class User {
+    private Integer id;
 
-  private int id;
-  private String nikename;
-  private int gender;
-  private String province;
-  private String city;
-  private String country;
-  private String openid;
+    private String nikename;
 
+    private Integer gender;
 
-  public long getId() {
-    return id;
-  }
+    private String province;
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    private String city;
 
+    private String country;
 
-  public String getNikename() {
-    return nikename;
-  }
+    private String openid;
 
-  public void setNikename(String nikename) {
-    this.nikename = nikename;
-  }
+    private String username;
 
+    private String password;
 
-  public long getGender() {
-    return gender;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setGender(int gender) {
-    this.gender = gender;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public String getNikename() {
+        return nikename;
+    }
 
-  public String getProvince() {
-    return province;
-  }
+    public void setNikename(String nikename) {
+        this.nikename = nikename == null ? null : nikename.trim();
+    }
 
-  public void setProvince(String province) {
-    this.province = province;
-  }
+    public Integer getGender() {
+        return gender;
+    }
 
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
 
-  public String getCity() {
-    return city;
-  }
+    public String getProvince() {
+        return province;
+    }
 
-  public void setCity(String city) {
-    this.city = city;
-  }
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
+    }
 
+    public String getCity() {
+        return city;
+    }
 
-  public String getCountry() {
-    return country;
-  }
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
+    }
 
-  public void setCountry(String country) {
-    this.country = country;
-  }
+    public String getCountry() {
+        return country;
+    }
 
+    public void setCountry(String country) {
+        this.country = country == null ? null : country.trim();
+    }
 
-  public String getOpenid() {
-    return openid;
-  }
+    public String getOpenid() {
+        return openid;
+    }
 
-  public void setOpenid(String openid) {
-    this.openid = openid;
-  }
+    public void setOpenid(String openid) {
+        this.openid = openid == null ? null : openid.trim();
+    }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", nikename=").append(nikename);
+        sb.append(", gender=").append(gender);
+        sb.append(", province=").append(province);
+        sb.append(", city=").append(city);
+        sb.append(", country=").append(country);
+        sb.append(", openid=").append(openid);
+        sb.append(", username=").append(username);
+        sb.append(", password=").append(password);
+        sb.append("]");
+        return sb.toString();
+    }
 }
