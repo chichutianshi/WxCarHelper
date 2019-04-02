@@ -2,6 +2,7 @@ package com.cust.controller;
 
 import com.cust.Utils.WxUtils;
 import com.cust.service.UserService;
+import easy.web.RequestTool;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,13 @@ public class UserController {
      * 40029	code 无效
      * 45011	频率限制，每个用户每分钟100次
      *
-     * @param map
+     * @param response,request
      * @return String
      */
     @RequestMapping("/login")
     public String wxUserLogin(HttpServletResponse response, HttpServletRequest request) throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
-        Map map=request.getParameterMap();
+        Map map = RequestTool.getParameterMap(request);
         System.out.println(map.get("code"));
         String userOpenId = wxUtils.oauth2GetOpenid((String) map.get("code"));
         System.out.println(userOpenId);
