@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     name: test
-    url: jdbc:mysql://127.0.0.1:3306/cargg?useSSL=false&serverTimezone=Hongkong&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://127.0.0.1:3306/wxcar?useSSL=false&serverTimezone=Hongkong&allowPublicKeyRetrieval=true
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
@@ -23,7 +23,5 @@ spring:
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
 
-mybatis:
-  mapper-locations: classpath:mybatis/*.xml
 
 

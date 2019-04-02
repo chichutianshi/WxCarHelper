@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="cargg@localhost">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.11">
+<dataSource name="wxcar@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.9">
     <root id="1">
       <ServerVersion>8.0.15</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
       <DefaultCasing>lower/lower</DefaultCasing>
     </root>
-    <schema id="2" parent="1" name="cargg">
+    <schema id="2" parent="1" name="information_schema">
+      <Collation>utf8_general_ci</Collation>
+    </schema>
+    <schema id="3" parent="1" name="mysql">
+      <Collation>utf8_general_ci</Collation>
+    </schema>
+    <schema id="4" parent="1" name="performance_schema">
+      <Collation>utf8mb4_0900_ai_ci</Collation>
+    </schema>
+    <schema id="5" parent="1" name="sys">
+      <Collation>utf8mb4_0900_ai_ci</Collation>
+    </schema>
+    <schema id="6" parent="1" name="wxcar">
       <Current>1</Current>
-      <Visible>1</Visible>
       <Collation>utf8_general_ci</Collation>
-    </schema>
-    <schema id="3" parent="1" name="information_schema">
-      <Collation>utf8_general_ci</Collation>
-    </schema>
-    <schema id="4" parent="1" name="mysql">
-      <Collation>utf8_general_ci</Collation>
-    </schema>
-    <schema id="5" parent="1" name="performance_schema">
-      <Collation>utf8mb4_0900_ai_ci</Collation>
-    </schema>
-    <schema id="6" parent="1" name="sys">
-      <Collation>utf8mb4_0900_ai_ci</Collation>
     </schema>
     <collation id="7" parent="1" name="armscii8_bin">
       <Charset>armscii8</Charset>
@@ -1104,48 +1103,5 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="277" parent="2" name="user"/>
-    <column id="278" parent="277" name="id">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="279" parent="277" name="nikename">
-      <Position>2</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="280" parent="277" name="gender">
-      <Position>3</Position>
-      <DataType>int(11)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="281" parent="277" name="province">
-      <Position>4</Position>
-      <DataType>varchar(45)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="282" parent="277" name="city">
-      <Position>5</Position>
-      <DataType>varchar(45)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="283" parent="277" name="country">
-      <Position>6</Position>
-      <DataType>varchar(45)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="284" parent="277" name="openid">
-      <Position>7</Position>
-      <DataType>varchar(70)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="285" parent="277" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
   </database-model>
 </dataSource>
