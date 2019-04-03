@@ -46,6 +46,7 @@ public class UserController {
     public Map wxUserLogin(HttpServletRequest request) throws IOException {
         request.setCharacterEncoding("UTF-8");
         Map map = RequestTool.getParameterMap(request);
+        System.out.println(map);
         Map<String, String> repMap = new HashMap();
         if (!map.containsKey("code")) {
             repMap.put("status", "-1");
@@ -57,7 +58,7 @@ public class UserController {
         try {
             //String转为json
             JSONObject usrOpenIdAndSessionKey = (JSONObject) (new JSONParser().parse(userOpenId));
-            if ((Long) usrOpenIdAndSessionKey.get("errcode") == 0) {
+            if (!usrOpenIdAndSessionKey.containsKey("errcode")) {
                 //获取openid成功
                 String openid = (String) usrOpenIdAndSessionKey.get("openid");
                 System.out.println(openid);
