@@ -8,6 +8,7 @@ import easy.web.RequestTool;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,8 @@ public class UserController {
     private WxUtils wxUtils;
     @Autowired
     private UserService userService;
+    @Autowired
+    private RedisTemplate<Object, Object> redisTemplate;
 
     /**
      * 获取前端code，此方法用于发送请求到auth.code2Session接口获取用户openid以及sessionkey
@@ -43,7 +46,7 @@ public class UserController {
     public Map wxUserLogin(HttpServletRequest request) throws IOException {
         request.setCharacterEncoding("UTF-8");
         Map map = RequestTool.getParameterMap(request);
-        Map<String,String> repMap = new HashMap();
+        Map<String, String> repMap = new HashMap();
         if (!map.containsKey("code")) {
             repMap.put("status", "-1");
             return repMap;
@@ -60,20 +63,18 @@ public class UserController {
                 System.out.println(openid);
                 String session_Key = (String) usrOpenIdAndSessionKey.get("session_key");
                 System.out.println(session_Key);
+                //产生第三方会话密钥
+                String thirdSessionKey = Token.CreateToken();
+                JSONObject sessionObj = new JSONObject();
+                sessionObj.put("openid", openid);
+                sessionObj.put("session_key", session_Key);
                 //查询此openid是否存在
                 String id = userService.selectUserOpenId(openid);
                 if (id != null && !id.equals("")) {
                     //此用户为老用户
-
                     //返回用户数据库中唯一id
                     repMap.put("id", id);
-                    //产生第三方会话密钥
-                    repMap.put("thirdSessionKey", Token.CreateToken());
-                    repMap.put("status", "0");
-                    //更新redis
-
-
-                    return repMap;
+                    repMap.put("thirdSessionKey", thirdSessionKey);
                 } else {
                     //此用户为新用户
                     JSONObject wxuser = (JSONObject) (new JSONParser().parse((String) map.get("rawData")));
@@ -89,19 +90,24 @@ public class UserController {
                     if (userService.insertUserInfo(userInfo)) {
                         //插入新用户成功
                         repMap.put("id", newId);
-                        repMap.put("thirdSessionKey",Token.CreateToken());
-                        repMap.put("status", "0");
-                        //插入redis
-
-
-                        return repMap;
+                        repMap.put("thirdSessionKey", thirdSessionKey);
                     } else {
                         //插入新用户失败
                         repMap.put("status", "-1");
                         return repMap;
                     }
                 }
-
+                //更新redis
+                String key = (String) redisTemplate.opsForValue().get("openid");
+                if (key != null) {
+                    redisTemplate.delete(redisTemplate.opsForValue().get(key));
+                    redisTemplate.delete(key);
+                }
+                redisTemplate.opsForValue().set(openid, repMap.get("thirdSessionKey"));
+                redisTemplate.opsForValue().set(repMap.get("thirdSessionKey"), sessionObj.toJSONString());
+                //登陆成功
+                repMap.put("status", "0");
+                return repMap;
             } else {
                 //获取用户openid失败
                 repMap.put("status", "-1");
@@ -123,7 +129,7 @@ public class UserController {
     @RequestMapping("/uuidLogin")
     public Map uuidLogin(HttpServletRequest request) {
         Map map = RequestTool.getParameterMap(request);
-        Map<String,String> reqMap=new HashMap<>();
+        Map<String, String> reqMap = new HashMap<>();
         String thirdSessionKey = String.valueOf(map.get("thirdSessionKey"));
         //查询redis进行登陆
 
@@ -131,9 +137,9 @@ public class UserController {
     }
 
     @RequestMapping("/test")
-    public String test(){
+    public String test() {
 
-        String str=userService.selectUserOpenId("123");
+        String str = userService.selectUserOpenId("123");
         return str;
     }
 }

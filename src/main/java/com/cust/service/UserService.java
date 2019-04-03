@@ -17,32 +17,16 @@ public class UserService {
     private UserMapper userMapper;
 
     @Autowired
-    private RedisTemplate<Object,Object> redisTemplate;
-
-
+    private RedisTemplate<Object, Object> redisTemplate;
 
     public String selectUserOpenId(String openid) {
-        Map userInfo=new HashMap();
-        String userid= (String) redisTemplate.opsForValue().get(openid);
-        if (null==userid){
-            System.out.println("没有走缓存");
-            userInfo = userMapper.selectUser(openid);
-            redisTemplate.opsForValue().set(openid, userInfo.get("id"),5, TimeUnit.SECONDS);
-
-            return (String) userInfo.get("id");
-        }else {
-           return userid;
-       }
-
-
-//        System.out.println(userInfo);
-//        if (userInfo != null) {
-//            return Integer.toString((Integer) userInfo.get("id"));
-
-//        } else {
-//            return null;
-//        }
-
+        User userInfo = userMapper.selectUser(openid);
+        System.out.println(userInfo);
+        if (userInfo != null) {
+            return userInfo.getId();
+        } else {
+            return null;
+        }
     }
 
     public boolean insertUserInfo(User userInfo) {

@@ -10,7 +10,7 @@ import java.util.Map;
 @Repository
 public interface UserMapper {
     @Select("select * from user where openid=#{openid}")
-    Map selectUser(String openid);
+    User selectUser(String openid);
 
     @Insert("insert into user (id,nickname,gender,province,city,country,openid) values(#{id},#{nickname},#{gender},#{province},#{city},#{country},#{openid})")
     int insertUserInfo(User user);
