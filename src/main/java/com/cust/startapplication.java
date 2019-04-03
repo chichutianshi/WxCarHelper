@@ -11,12 +11,12 @@ import java.rmi.server.ExportException;
 @SpringBootApplication
 @MapperScan("com.cust.dao")
 public class startapplication extends SpringBootServletInitializer {
-    public static void main(String[] args){
-        SpringApplication.run(ExportException.class,args);
+    public static void main(String[] args) {
+        SpringApplication.run(ExportException.class, args);
     }
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder){
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(this.getClass());
     }
 }

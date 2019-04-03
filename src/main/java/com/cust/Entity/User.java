@@ -3,7 +3,7 @@ package com.cust.Entity;
 public class User {
     private Integer id;
 
-    private String nikename;
+    private String nickname;
 
     private Integer gender;
 
@@ -28,11 +28,11 @@ public class User {
     }
 
     public String getNikename() {
-        return nikename;
+        return nickname;
     }
 
-    public void setNikename(String nikename) {
-        this.nikename = nikename == null ? null : nikename.trim();
+    public void setNikename(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 
     public Integer getGender() {
@@ -98,7 +98,7 @@ public class User {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", nikename=").append(nikename);
+        sb.append(", nickname=").append(nickname);
         sb.append(", gender=").append(gender);
         sb.append(", province=").append(province);
         sb.append(", city=").append(city);
