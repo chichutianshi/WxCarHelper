@@ -129,4 +129,11 @@ public class UserController {
 
         return null;
     }
+
+    @RequestMapping("/test")
+    public String test(){
+
+        String str=userService.selectUserOpenId("123");
+        return str;
+    }
 }
