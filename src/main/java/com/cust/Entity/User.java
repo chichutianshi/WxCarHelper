@@ -1,7 +1,7 @@
 package com.cust.Entity;
 
 public class User {
-    private Integer id;
+    private String id;
 
     private String nickname;
 
@@ -19,19 +19,19 @@ public class User {
 
     private String password;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getNikename() {
+    public String getNickname() {
         return nickname;
     }
 
-    public void setNikename(String nickname) {
+    public void setNickname(String nickname) {
         this.nickname = nickname == null ? null : nickname.trim();
     }
 

@@ -12,6 +12,6 @@ public interface UserMapper {
     @Select("select * from user where openid=#{openid}")
     Map selectUser(String openid);
 
-    @Insert("insert into user (nickname,gender,province,city,country,openid) values(#{nickname},#{gender},#{province},#{city},#{country},#{openid})")
+    @Insert("insert into user (id,nickname,gender,province,city,country,openid) values(#{id},#{nickname},#{gender},#{province},#{city},#{country},#{openid})")
     int insertUserInfo(User user);
 }

@@ -12,13 +12,13 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public boolean selectUserOpenId(String openid) {
+    public String selectUserOpenId(String openid) {
         Map userInfo = userMapper.selectUser(openid);
         System.out.println(userInfo);
         if (userInfo != null) {
-            return true;
+            return (String) userInfo.get("id");
         } else {
-            return false;
+            return null;
         }
 
     }
