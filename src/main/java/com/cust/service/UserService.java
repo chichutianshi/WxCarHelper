@@ -1,5 +1,6 @@
 package com.cust.service;
 
+import com.cust.Entity.User;
 import com.cust.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class UserService {
 
     }
 
-    public boolean insertUserInfo(Map userInfo) {
+    public boolean insertUserInfo(User userInfo) {
 
         return userMapper.insertUserInfo(userInfo) > 0 ? true : false;
     }

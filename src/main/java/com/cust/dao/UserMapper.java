@@ -1,5 +1,6 @@
 package com.cust.dao;
 
+import com.cust.Entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -12,5 +13,5 @@ public interface UserMapper {
     Map selectUser(String openid);
 
     @Insert("insert into user (nickname,gender,province,city,country,openid) values(#{nickname},#{gender},#{province},#{city},#{country},#{openid})")
-    int insertUserInfo(Map map);
+    int insertUserInfo(User user);
 }

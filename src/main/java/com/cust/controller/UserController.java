@@ -1,5 +1,6 @@
 package com.cust.controller;
 
+import com.cust.Entity.User;
 import com.cust.Utils.WxUtils;
 import com.cust.service.UserService;
 import easy.web.RequestTool;
@@ -9,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
@@ -32,20 +31,23 @@ public class UserController {
      * 40029	code 无效
      * 45011	频率限制，每个用户每分钟100次
      *
-     * @param response,request
-     * @return String
+     * @param request
+     * @return
      */
-    @RequestMapping("/login")
-    public String wxUserLogin(HttpServletResponse response, HttpServletRequest request) throws IOException, ServletException {
+    @RequestMapping("/WeChatlogin")
+    public String wxUserLogin(HttpServletRequest request) throws IOException {
         request.setCharacterEncoding("UTF-8");
         Map map = RequestTool.getParameterMap(request);
+        if (!map.containsKey("code")) {
+            return "-1";
+        }
         System.out.println(map.get("code"));
         String userOpenId = wxUtils.oauth2GetOpenid((String) map.get("code"));
         System.out.println(userOpenId);
         try {
             //String转为josn
             JSONObject usrOpenIdAndSessionKey = (JSONObject) (new JSONParser().parse(userOpenId));
-            if ((int) usrOpenIdAndSessionKey.get("errcode") == 0) {
+            if ((Long) usrOpenIdAndSessionKey.get("errcode") == 0) {
                 //获取openid成功
                 String openid = (String) usrOpenIdAndSessionKey.get("openid");
                 System.out.println(openid);
@@ -56,7 +58,15 @@ public class UserController {
 
                 } else {
                     //此用户为新用户
-                    if (userService.insertUserInfo(map)) {
+                    JSONObject wxuser = (JSONObject) (new JSONParser().parse((String) map.get("rawData")));
+                    User userInfo = new User();
+                    userInfo.setCity(String.valueOf(wxuser.get("city")));
+                    userInfo.setCountry(String.valueOf(wxuser.get("country")));
+                    userInfo.setGender((Integer) wxuser.get("gender"));
+                    userInfo.setNikename(String.valueOf(wxuser.get("nickname")));
+                    userInfo.setOpenid(String.valueOf(wxuser.get("openid")));
+                    userInfo.setProvince(String.valueOf(wxuser.get("province")));
+                    if (userService.insertUserInfo(userInfo)) {
                         //插入新用户成功
 
                     } else {
@@ -73,5 +83,18 @@ public class UserController {
             e.printStackTrace();
         }
         return "-1";
+    }
+
+    /**
+     * 获取服务器产生的第三方会话密钥，查询redis进行快速登陆（小程序没有cookie机制）
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/uuidLogin")
+    public Map uuidLogin(HttpServletRequest request) {
+        Map map = RequestTool.getParameterMap(request);
+        String thirdSessionKey = String.valueOf(map.get("thirdSessionKey"));
+        return null;
     }
 }
