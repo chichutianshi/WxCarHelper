@@ -1,9 +1,9 @@
 package com.cust.Entity;
 
 public class User {
-    private Integer id;
+    private String id;
 
-    private String nikename;
+    private String nickname;
 
     private Integer gender;
 
@@ -19,20 +19,20 @@ public class User {
 
     private String password;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getNikename() {
-        return nikename;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNikename(String nikename) {
-        this.nikename = nikename == null ? null : nikename.trim();
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 
     public Integer getGender() {
@@ -98,7 +98,7 @@ public class User {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", nikename=").append(nikename);
+        sb.append(", nickname=").append(nickname);
         sb.append(", gender=").append(gender);
         sb.append(", province=").append(province);
         sb.append(", city=").append(city);
