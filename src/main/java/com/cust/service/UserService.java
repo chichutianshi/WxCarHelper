@@ -20,9 +20,19 @@ public class UserService {
     private RedisTemplate<Object, Object> redisTemplate;
 
     public String selectUserOpenId(String openid) {
-        User userInfo = userMapper.selectUser(openid);
-        System.out.println(userInfo);
+        String userid= (String) redisTemplate.opsForValue().get(openid);
+        User userInfo=new User();
+        if (null==userid){
+            System.out.println("无缓存");
+            synchronized (this){
+                userInfo = userMapper.selectUser(openid);//线程锁
+            }
+        }else {
+            return userid;
+        }
+
         if (userInfo != null) {
+            redisTemplate.opsForValue().set(openid,userInfo.getId(),10,TimeUnit.SECONDS);
             return userInfo.getId();
         } else {
             return null;

@@ -140,7 +140,9 @@ public class UserController {
     @RequestMapping("/test")
     public String test() {
 
-        String str = userService.selectUserOpenId("123");
+        String str = userService.selectUserOpenId("1233");
+        String str1 = userService.selectUserOpenId("1244");
+        String str2 = userService.selectUserOpenId("1255");
         return str;
     }
 }
