@@ -32,7 +32,7 @@ public class UserService {
         }
 
         if (userInfo != null) {
-            redisTemplate.opsForValue().set(openid,userInfo.getId(),10,TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(openid,userInfo.getId(),604800,TimeUnit.SECONDS);
             return userInfo.getId();
         } else {
             return null;
