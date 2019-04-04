@@ -62,13 +62,8 @@ public class UserController {
                 //获取openid成功
                 String openid = (String) usrOpenIdAndSessionKey.get("openid");
                 System.out.println(openid);
-                String session_Key = (String) usrOpenIdAndSessionKey.get("session_key");
-                System.out.println(session_Key);
                 //产生第三方会话密钥
                 String thirdSessionKey = Token.CreateToken();
-                JSONObject sessionObj = new JSONObject();
-                sessionObj.put("openid", openid);
-                sessionObj.put("session_key", session_Key);
                 //查询此openid是否存在
                 String id = userService.selectUserOpenId(openid);
                 if (id != null && !id.equals("")) {
@@ -105,8 +100,9 @@ public class UserController {
                     redisTemplate.delete(key);
                 }
                 redisTemplate.opsForValue().set(openid, repMap.get("thirdSessionKey"));
-                redisTemplate.opsForValue().set(repMap.get("thirdSessionKey"), sessionObj.toJSONString());
+                redisTemplate.opsForValue().set(repMap.get("thirdSessionKey"), repMap.get("id"));
                 //登陆成功
+                repMap.remove("id");
                 repMap.put("status", "0");
                 return repMap;
             } else {
@@ -133,16 +129,11 @@ public class UserController {
         Map<String, String> reqMap = new HashMap<>();
         String thirdSessionKey = String.valueOf(map.get("thirdSessionKey"));
         //查询redis进行登陆
-
+        String id = (String) redisTemplate.opsForValue().get(thirdSessionKey);
+        if (id != null) {
+            reqMap.put("status", "0");
+            return reqMap;
+        }
         return null;
-    }
-
-    @RequestMapping("/test")
-    public String test() {
-
-        String str = userService.selectUserOpenId("1233");
-        String str1 = userService.selectUserOpenId("1244");
-        String str2 = userService.selectUserOpenId("1255");
-        return str;
     }
 }
