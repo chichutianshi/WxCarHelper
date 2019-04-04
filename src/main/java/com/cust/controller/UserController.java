@@ -84,9 +84,9 @@ public class UserController {
                     userInfo.setId(newId);
                     userInfo.setCity(String.valueOf(wxuser.get("city")));
                     userInfo.setCountry(String.valueOf(wxuser.get("country")));
-                    userInfo.setGender((Integer) wxuser.get("gender"));
-                    userInfo.setNickname(String.valueOf(wxuser.get("nickname")));
-                    userInfo.setOpenid(String.valueOf(wxuser.get("openid")));
+                    userInfo.setGender(Integer.parseInt(String.valueOf(wxuser.get("gender"))));
+                    userInfo.setNickname(String.valueOf(wxuser.get("nickName")));
+                    userInfo.setOpenid(openid);
                     userInfo.setProvince(String.valueOf(wxuser.get("province")));
                     if (userService.insertUserInfo(userInfo)) {
                         //插入新用户成功
