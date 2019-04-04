@@ -86,7 +86,7 @@ public class UserController {
                     userInfo.setCountry(String.valueOf(wxuser.get("country")));
                     userInfo.setGender((Integer) wxuser.get("gender"));
                     userInfo.setNickname(String.valueOf(wxuser.get("nickname")));
-                    userInfo.setOpenid(openid);
+                    userInfo.setOpenid(String.valueOf(wxuser.get("openid")));
                     userInfo.setProvince(String.valueOf(wxuser.get("province")));
                     if (userService.insertUserInfo(userInfo)) {
                         //插入新用户成功
