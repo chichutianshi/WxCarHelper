@@ -99,13 +99,6 @@
             <artifactId>bcprov-jdk15</artifactId>
             <version>1.45</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.github.fhdalotaibi/android-cryptography -->
-        <dependency>
-            <groupId>com.github.fhdalotaibi</groupId>
-            <artifactId>android-cryptography</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
 
     </dependencies>
 
